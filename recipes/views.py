@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.views import generic
 
 # Create your views here.
 from recipes.models import Recipe
@@ -9,14 +9,19 @@ def index(request):
     return HttpResponse(render(request, 'recipes/index.html'))
 
 
-def recipe(request, recipe_id=1):
-    given_recipe = Recipe.objects.get(id=recipe_id)
-    recipe_ingredients = given_recipe.ingredients.through.objects.all()
-    context = {
-        'recipe': given_recipe,
-        'recipe_ingredients': recipe_ingredients
-    }
-    return HttpResponse(render(request, 'recipes/recipe.html', context))
+class IndexView(generic.ListView):
+    queryset = Recipe.objects.order_by('name')
+    template_name = 'recipes/recipes_list.html'
+
+
+class RecipeView(generic.DetailView):
+    model = Recipe
+    template_name = 'recipes/recipe.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['recipe_ingredients'] = context['object'].recipeingredient_set.all()
+        return context
 
 
 def add_recipe(request):

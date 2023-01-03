@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes</title>
+</head>
+
+<body>
+
+{% regroup object_list by meal as meals_list %}
+{% block content %}
+    <h1>Recipes</h1>
+    {% for meal in meals_list %}
+        <h2>{{ meal.grouper }}</h2>
+        <ul>
+        {% for recipe in meal.list %}
+            <li>{{ recipe.name }}</li>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+
+{% endblock %}
+
+
+</body>
+</html>

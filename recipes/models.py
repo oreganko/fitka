@@ -9,10 +9,21 @@ class Ingredient(models.Model):
 
 
 class Recipe(models.Model):
+    class MealTime(models.TextChoices):
+        BREAKFAST = 'Breakfast'
+        SECOND_BREAKFAST = 'Second breakfast'
+        LUNCH = 'Lunch'
+        ELEVENSES = 'Elevenses'
+        SUPPER = 'Supper'
+        SNACK = 'Snack'
+
     name = models.CharField(max_length=70)
     calories = models.IntegerField(default=0)
     cooking_time_minutes = models.IntegerField(default=0)
-    meal = models.CharField(max_length=30)
+    meal = models.CharField(max_length=20,
+                            choices=MealTime.choices,
+                            default=MealTime.BREAKFAST)
+    preparation = models.TextField()
     ingredients = models.ManyToManyField(
         Ingredient,
         through='RecipeIngredient',
@@ -20,11 +31,7 @@ class Recipe(models.Model):
     )
 
     def __str__(self):
-        return (f'{self.name} - {self.meal} ({self.calories} kcal, {self.cooking_time_minutes} min)' +
-                '\n\t' +
-                '\n\t'.join([str(ingredient.ingredient) + ' ' + str(ingredient.amount) + ' ' + ingredient.amount_unit
-                             for ingredient in self.ingredients.through.objects.all()])
-                )
+        return self.name
 
 
 class RecipeIngredient(models.Model):
