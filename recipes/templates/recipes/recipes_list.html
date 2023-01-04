@@ -1,3 +1,7 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'recipes/index.css' %}">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,14 +11,15 @@
 
 <body>
 
-{% regroup object_list by meal as meals_list %}
+{% regroup object_list|dictsort:'meal' by meal as meals_list %}
 {% block content %}
     <h1>Recipes</h1>
+    <a href="{% url 'add_recipe' %}" class="button">Add recipe</a>
     {% for meal in meals_list %}
         <h2>{{ meal.grouper }}</h2>
         <ul>
         {% for recipe in meal.list %}
-            <li>{{ recipe.name }}</li>
+            <li><a href="{{ recipe.get_absolute_url }}">{{ recipe.name }}</a></li>
         {% endfor %}
         </ul>
     {% endfor %}

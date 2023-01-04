@@ -5,10 +5,6 @@ from django.views import generic
 from recipes.models import Recipe
 
 
-def index(request):
-    return HttpResponse(render(request, 'recipes/index.html'))
-
-
 class IndexView(generic.ListView):
     queryset = Recipe.objects.order_by('name')
     template_name = 'recipes/recipes_list.html'
@@ -26,4 +22,3 @@ class RecipeView(generic.DetailView):
 
 def add_recipe(request):
     return HttpResponse('Adding recipe, help yourself...')
-
