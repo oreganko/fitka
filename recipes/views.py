@@ -9,6 +9,13 @@ class IndexView(generic.ListView):
     queryset = Recipe.objects.order_by('name')
     template_name = 'recipes/recipes_list.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        recent_views = self.request.session.get('num_visits', 0)
+        context['num_visits'] = recent_views + 1
+        self.request.session['num_visits'] = recent_views + 1
+        return context
+
 
 class RecipeView(generic.DetailView):
     model = Recipe
