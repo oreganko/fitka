@@ -2,8 +2,6 @@
 
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'recipes/index.css' %}">
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +13,7 @@
 
 {% block content %}
     {% regroup object_list|dictsort:'meal' by meal as meals_list %}
-    <div id="mainDiv">
+    <div id="headerWithPlusButton">
         <h1>Recipes</h1>
         <a href="{% url 'add_recipe' %}" class="plus-button btn">
             <span class="bi bi-plus-circle"></span>
@@ -49,16 +47,10 @@
                         </td>
                     </tr>
                     </a>
-                    {#                    <li><a href="{{ recipe.get_absolute_url }}">{{ recipe.name }}</a></li>#}
                 {% endfor %}
 
                 </tbody>
             </table>
-            {#            <ul>#}
-            {#                {% for recipe in meal.list %}#}
-            {#                    <li><a href="{{ recipe.get_absolute_url }}">{{ recipe.name }}</a></li>#}
-            {#                {% endfor %}#}
-            {#            </ul>#}
         {% endfor %}
     </div>
 

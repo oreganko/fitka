@@ -1,3 +1,9 @@
+:root {
+    --main-color: goldenrod;
+    --main-light-color: lightgoldenrodyellow;
+    --shade-color: #a67708;
+}
+
 body {
     height: 100%;
     background-color: #fcfcf5;
@@ -18,7 +24,11 @@ body {
 }
 
 .navbar-light {
-    background-color: goldenrod;
+    background-color: var(--main-color);
+}
+
+.navbar-light .navbar-nav {
+    padding-left: 50px;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -33,22 +43,27 @@ body {
 }
 
 .navbar a {
-    color: lightgoldenrodyellow;
+    color: var(--main-light-color);
     font-size: 20px;
     text-decoration: none;
     font-weight: bold;
-}
-
-li a {
-    color: green;
 }
 
 a:link {
     text-decoration: none;
 }
 
-a.button {
-    background-color: goldenrod; /* Green */
+a:active {
+    color: var(--main-color);
+}
+
+a:visited {
+    color: var(--shade-color);
+}
+
+a.button,
+input[type=submit]{
+    background-color: var(--main-color);
     border: none;
     color: #fcfcf5;
     padding: 10px 20px;
@@ -56,26 +71,31 @@ a.button {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    border-radius: 10px;
+}
+
+input[type=submit]:hover {
+    background-color: var(--shade-color);
 }
 
 .plus-button {
-    /*height: 50px;*/
     font-size: 40px;
     font-weight: bold;
     margin-left: fill;
 }
 
 a.plus-button .bi-plus-circle {
-    color: goldenrod;
+    color: var(--main-color);
 }
 
 .bi-arrow-right {
     color: black;
 }
 
+
 .table-button:hover .bi-arrow-right,
 a.plus-button:hover .bi-plus-circle {
-    color: #a67708;
+    color: var(--shade-color);
 }
 
 .table .table-button {
@@ -84,7 +104,7 @@ a.plus-button:hover .bi-plus-circle {
     background-color: inherit;
 }
 
-#mainDiv {
+#headerWithPlusButton {
     display: flex;
     align-items: center;
 }
