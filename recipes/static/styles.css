@@ -1,0 +1,123 @@
+:root {
+    --main-color: goldenrod;
+    --main-light-color: lightgoldenrodyellow;
+    --shade-color: #a67708;
+}
+
+body {
+    height: 100%;
+    background-color: #fcfcf5;
+    z-index: 1;
+}
+
+.container-fluid {
+    height: 180px;
+}
+
+.logo {
+    width: 180px;
+    padding-bottom: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.navbar-light {
+    background-color: var(--main-color);
+}
+
+.navbar-light .navbar-nav {
+    padding-left: 50px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #fcfcf5;
+}
+
+.navbar {
+    height: 80px;
+    z-index: 20;
+    justify-content: flex-end;
+    padding-left: 200px;
+}
+
+.navbar a {
+    color: var(--main-light-color);
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:active {
+    color: var(--main-color);
+}
+
+a:visited {
+    color: var(--shade-color);
+}
+
+a.button,
+input[type=submit]{
+    background-color: var(--main-color);
+    border: none;
+    color: #fcfcf5;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+input[type=submit]:hover {
+    background-color: var(--shade-color);
+}
+
+.plus-button {
+    font-size: 40px;
+    font-weight: bold;
+    margin-left: fill;
+}
+
+a.plus-button .bi-plus-circle {
+    color: var(--main-color);
+}
+
+.bi-arrow-right {
+    color: black;
+}
+
+
+.table-button:hover .bi-arrow-right,
+a.plus-button:hover .bi-plus-circle {
+    color: var(--shade-color);
+}
+
+.table .table-button {
+    size: 40px 40px;
+    padding: 0 20px;
+    background-color: inherit;
+}
+
+#headerWithPlusButton {
+    display: flex;
+    align-items: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+

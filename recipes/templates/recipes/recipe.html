@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% if recipe.name %} {{ recipe.name }}
+        {% else %} Recipe not found
+        {%  endif %}
+    </title>
+</head>
+<body>
+{% if recipe %}
+    <p><strong>{{ recipe.name }}</strong></p>
+    {{ recipe.cooking_time_minutes }} min -- {{ recipe.calories }} kcal -- {{ recipe.meal }}
+    <ul>
+    {% for ingredient in recipe_ingredients %}
+        <li>{{ ingredient.ingredient }} - {{ ingredient.amount }} {{ ingredient.amount_unit }} </li>
+    {% endfor %}
+    </ul>
+    <p>
+    {{ recipe.preparation }}
+    </p>
+{% else %}
+    <p>Recipe does not exist.</p>
+{% endif %}
+
+</body>
+</html>

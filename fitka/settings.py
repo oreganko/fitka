@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'add_recipe.apps.AddRecipeConfig',
+    'recipes.apps.RecipesConfig',
     'get_diet.apps.GetDietConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -111,6 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/recipes'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

@@ -1,0 +1,63 @@
+{% extends "recipes_generic.html" %}
+
+{% block content %}
+
+    <div class="container-fluid h-100">
+        <div class="row">
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-2">
+                <table style="width: 100%">
+                    {% if form.errors %}
+                        <tr>
+                            <td><p style="color: #a67708">Your username and password didn't match.
+                                Please try again.</p>
+                            </td>
+                        </tr>
+                    {% endif %}
+
+                    {% if next %}
+                        {% if user.is_authenticated %}
+                            <p>Your account doesn't have access to this page. To proceed,
+                                please login with an account that has access.</p>
+                        {% else %}
+                            <p>Please login to see this page.</p>
+                        {% endif %}
+                    {% endif %}
+
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+
+
+                        <tr>
+                            <td>{{ form.username.label_tag }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form.username }}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top: 10px">{{ form.password.label_tag }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form.password }}</td>
+                        </tr>
+                        <tr style="text-align: center">
+                            <td style="padding-top: 20px"><input type="submit" value="Login" style="width: 100%"></td>
+                        </tr>
+                        <tr style="text-align: right">
+                            <td style="padding-top: 5px">
+                                <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+                            </td>
+                        </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <input type="hidden" name="next" value="{{ next }}">
+    </form>
+
+    {# Assumes you setup the password_reset view in your URLconf #}
+
+{% endblock %}

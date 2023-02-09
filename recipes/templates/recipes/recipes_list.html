@@ -1,0 +1,64 @@
+{% extends "recipes_generic.html" %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes</title>
+</head>
+
+<body>
+
+{% block content %}
+    {% regroup object_list|dictsort:'meal' by meal as meals_list %}
+    <div id="headerWithPlusButton">
+        <h1>Recipes</h1>
+        <a href="{% url 'add_recipe' %}" class="plus-button btn">
+            <span class="bi bi-plus-circle"></span>
+        </a>
+    </div>
+    <br>
+    <div class="col-sm-10">
+        {% for meal in meals_list %}
+            <h4>{{ meal.grouper }}</h4>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col" width="40px">#</th>
+                    <th scope="col" width="350px">Name</th>
+                    <th scope="col" width="100px">Calories</th>
+                    <th scope="col" width="100px">Time</th>
+                    <th scope="col" width="40px"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for recipe in meal.list %}
+                    <tr>
+                        <th>{{ recipe.id }}</th>
+                        <td>{{ recipe.name }}</td>
+                        <td>{{ recipe.calories }}</td>
+                        <td>{{ recipe.cooking_time_minutes }} min.</td>
+                        <td>
+                            <a href="{{ recipe.get_absolute_url }}" class="button table-button">
+                                <span class="bi bi-arrow-right"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    </a>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        {% endfor %}
+    </div>
+
+    <p>You have been here {{ num_visits }} time{{ num_visits|pluralize }}.</p>
+
+
+{% endblock %}
+
+
+</body>
+</html>
