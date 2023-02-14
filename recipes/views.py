@@ -1,11 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.views import generic
 
-# Create your views here.
 from recipes.models import Recipe
 
 
-class IndexView(generic.ListView):
+class RecipesListView(LoginRequiredMixin, generic.ListView):
     queryset = Recipe.objects.order_by('name')
     template_name = 'recipes/recipes_list.html'
 
@@ -17,7 +17,7 @@ class IndexView(generic.ListView):
         return context
 
 
-class RecipeView(generic.DetailView):
+class RecipeView(LoginRequiredMixin, generic.DetailView):
     model = Recipe
     template_name = 'recipes/recipe.html'
 
