@@ -118,7 +118,10 @@ h1 {
 }
 
 
-
+label,input{
+  display:flex;
+  flex-direction:column;
+}
 
 
 

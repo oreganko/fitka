@@ -39,3 +39,9 @@ class RecipeView(LoginRequiredMixin, UserPassesTestMixin, generic.DetailView):
 
 def add_recipe(request):
     return HttpResponse('Adding recipe, help yourself...')
+
+
+class AddRecipeView(LoginRequiredMixin, generic.edit.CreateView):
+    model = Recipe
+    fields = ['author']
+    template_name = 'recipes/add_recipe.html'

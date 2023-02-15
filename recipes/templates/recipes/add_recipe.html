@@ -1,10 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Add or Remove Input Fields Dynamically</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+</head>
+
+
+{% extends "recipes_generic.html" %}
+
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Recipes</title>
 </head>
+
 <body>
+
+{% block content %}
+
+    <form>
+        <div class="col-sm-7">
+            <table style="width: 100%">
+                <tr>
+                    <td>Ingredient</td>
+                    <td>Amount</td>
+                    <td>Unit</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text"
+                               class="form-control m-input"
+                               id="ingredient_name">
+                    </td>
+                    <td>
+                        <input type="text"
+                               class="form-control m-input"
+                               id="amount">
+                    </td>
+                    <td>
+                        <input type="text"
+                               class="form-control m-input"
+                               id="amount_unit">
+                    </td>
+                    <td>
+                        <button class="btn" id="DeleteRow">
+                            <span style="font-size: 30px" class="bi bi-trash3"></span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <table style="width: 100%" id="newinput"></table>
+        </div>
+
+
+        <button id="rowAdder" type="button"
+                class="btn btn-dark">
+                        <span class="bi bi-plus-square-dotted">
+                        </span> ADD
+        </button>
+    </form>
+
+    <script type="text/javascript">
+
+        $("#rowAdder").click(function () {
+            newRowAdd =
+                '<tr><td><input type="text" class="form-control m-input" id="ingredient_name"></td>' +
+                '<td><input type="text" class="form-control m-input" id="amount"></td>' +
+                '<td><input type="text" class="form-control m-input" id="amount_unit"></td>' +
+                '<td><button class="btn" id="DeleteRow">' +
+                '<span style="font-size: 30px" class="bi bi-trash3"></span></button></td></tr>';
+
+            $('#newinput').append(newRowAdd);
+        });
+
+        $("body").on("click", "#DeleteRow", function () {
+            $(this).parents("tr").remove();
+        })
+    </script>
+
+{% endblock %}
+
 
 </body>
 </html>
