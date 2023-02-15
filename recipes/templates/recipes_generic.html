@@ -20,11 +20,24 @@
             <img src="{% static 'Colorlogowithbackground.png' %}" alt="fitka_logo" class="logo">
             <nav class="navbar navbar-expand-lg navbar-light fixed-top">
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <div class="navbar-nav">
+                    <div class="navbar-nav col-sm-7">
                         <a class="nav-item nav-link" href="{% url 'index' %}">My recipes</a>
                         <a class="nav-item nav-link" href="">My diet</a>
                         <a class="nav-item nav-link" href="">Friends</a>
                     </div>
+                    {% if user.is_authenticated %}
+                        <div class="col-sm-2" style="text-align: right; margin-right: 10px">
+                            User: {{ user.get_username }}
+                        </div>
+                        <div class="col-sm-1">
+                            <a href="{% url 'logout' %}?next={{ request.path }}">Logout</a>
+                        </div>
+                    {% else %}
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-1">
+                            <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
+                        </div>
+                    {% endif %}
                 </div>
             </nav>
         </div>

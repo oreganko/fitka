@@ -1,13 +1,19 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Q
 from django.http import HttpResponse
 from django.views import generic
 
-# Create your views here.
 from recipes.models import Recipe
 
 
-class IndexView(generic.ListView):
+class RecipesListView(LoginRequiredMixin, generic.ListView):
     queryset = Recipe.objects.order_by('name')
     template_name = 'recipes/recipes_list.html'
+
+    def get_queryset(self):
+        return (
+            Recipe.objects.filter(Q(author=self.request.user) | Q(public=True))
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -17,9 +23,13 @@ class IndexView(generic.ListView):
         return context
 
 
-class RecipeView(generic.DetailView):
+class RecipeView(LoginRequiredMixin, UserPassesTestMixin, generic.DetailView):
     model = Recipe
     template_name = 'recipes/recipe.html'
+
+    def test_func(self):
+        recipe = self.get_object()
+        return recipe.author == self.request.user or recipe.public
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

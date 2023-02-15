@@ -10,7 +10,7 @@
 </head>
 <body>
 {% if recipe %}
-    <p><strong>{{ recipe.name }}</strong></p>
+    <p><strong>{{ recipe.name }}</strong> ( {{ recipe.author }} )</p>
     {{ recipe.cooking_time_minutes }} min -- {{ recipe.calories }} kcal -- {{ recipe.meal }}
     <ul>
     {% for ingredient in recipe_ingredients %}
